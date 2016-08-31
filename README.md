@@ -91,3 +91,29 @@ the [guidelines](CONTRIBUTING.md):
 ## License
 
 The code is available under the [MIT license](LICENSE.txt).
+
+1 创建CalcTron对象
+
+2 文档load事件触发，调用对象的init方法
+
+3 创建ClassLoader对象，
+4 CalcTron对象的init方法中设置setMode，
+5 setMode方法使用ClassLoader对象调用load方法动态加载Mode js文件，并添加
+script标签到文档中
+6 mode js文件被浏览器加载解析，在Standard.js文件中创建 标准mode对象
+并setMode
+7 setMode的else方法执行，设置当前mode，然后调用mode对象的init方法,init方法 的接收参数为null
+,
+8 ，如果方法接收的参数为null，那么就去加载json文件，
+
+
+9如果方法 的参数不为null， mode的init方法执行布局初始化风格
+  （1）获取mainContainer对象，
+
+ 
+
+
+4设置当前文档的mode
+
+
+
