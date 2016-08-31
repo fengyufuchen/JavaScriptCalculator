@@ -41,6 +41,41 @@ function CalcTron(){
         }
 
     }
+    this.changeModePopup=function(){
+        var divWidth=150;
+        var divHeight=150;
+        var modeDiv=document.getElementById("divMode");
+        modeDiv.style.width="0px";
+        modeDiv.style.height="0px";
+        var whatCorner=jscript.math.genRandomNumber(1,4);
+        switch(whatCorner){
+            case 1:
+                modeDiv.style.left="0px";
+                modeDiv.style.left="0px";
+                break;
+            case 2:
+                modeDiv.style.left=this.scrWidth-divWidth;
+                modeDiv.style.top="0px";
+                break;
+            case 3:
+                modeDiv.style.left=this.srcWidth-divWidth;
+                modeDiv.style.top="0px";
+                break;
+            case 4:
+                modeDiv.style.left=this.scrWidth-divWidth;
+                modeDiv.style.top=this.scrHeight-divHeight;
+                break;
+
+        }
+        var left=(this.scrWidth-divWidth)/2;
+        var top=(this.scrHeight-divHeight)/2;
+
+        document.getElementById("divMode").style.display="block";
+        new Rico.Effect.SizeAndPosition("divMode",left,top,divWidth,divHeight,400,25,null);
+
+
+
+    }
 
 
 

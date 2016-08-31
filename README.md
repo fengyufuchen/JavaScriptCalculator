@@ -92,6 +92,10 @@ the [guidelines](CONTRIBUTING.md):
 
 The code is available under the [MIT license](LICENSE.txt).
 
+## 项目实现思路
+
+第一部分
+
 1 解析文档，创建CalcTron对象
 
 2 文档load事件触发，调用calcTron对象的init方法
@@ -113,7 +117,17 @@ The code is available under the [MIT license](LICENSE.txt).
 
 9 浏览器解析Standard.json文件，执行json文件中的calcTron.currentMode.init方法，也就是又重新调用了Mode类型的init方法，此时init方法的参数不为null
 
-10
+10执行Mode的init方法，init方法接收到的参数是Standar.json中的Json字符串。在init方法中解析该字符串，然后更新显示div中的当前模式
+
+
+第二部分
+1 当点击界面中的mode button的时候，也就是对应htm文件中id为divMode的div标签，会调用changeModePopup方法，此时会出现一个divMode将会从
+某一个方向滚动滑出
+2实现原理：滚动滑出的效果更是通过rico库来实现的，在changeModePoup方法中计算divMode元素的起始位置和结束位置，然后调用   Rico.Effect.SizeAndPosition 对象实现滑动效果
+
+
+
+
 
 
 解析执行Standard.js文件中的Standard.prototype=new Mode(),是的Standard类继承自Mode类型；然后设置Model类型为 new Standard(),
