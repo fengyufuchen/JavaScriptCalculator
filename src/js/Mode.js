@@ -12,9 +12,36 @@ function Mode(){
     this.init=function(inVal){
         if(inVal){
 
+        }else{
+            this.loadJSON();
         }
 
     }
+    this.loadJSON=function(inID){
+    /*    var scriptsNodeList=document.getElementsByName("script");
+
+        var length=scriptsNodeList.length;
+        var scriptTagList=new Array();
+        while(length--){
+            var scriptTagSrc=scriptsNodeList[i].src;
+            if(scriptTagSrc.indexOf("modes/")>-1){
+                scriptTagList.push(scriptsNodeList[i]);
+            }
+        }
+
+        var index=scriptTagList.length;
+        while(index--){
+            document.head.removeChild(scriptTagList[i])
+        }*/
+    var scriptTag=document.createElement("script");
+        scriptTag.src="modes/"+this.id+".json";
+        var headTag=document.head||document.getElementsByTagName("head");
+        headTag.appendChild(scriptTag);
+
+
+
+    }
+
     this.updateResults=function(){
         var results=this.resultsCurrent;
         if(this.resultsCurrentNegated){

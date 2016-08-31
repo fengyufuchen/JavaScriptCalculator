@@ -92,16 +92,32 @@ the [guidelines](CONTRIBUTING.md):
 
 The code is available under the [MIT license](LICENSE.txt).
 
-1 创建CalcTron对象
+1 解析文档，创建CalcTron对象
 
-2 文档load事件触发，调用对象的init方法
+2 文档load事件触发，调用calcTron对象的init方法
 
-3 创建ClassLoader对象，
+3 init 方法中创建ClassLoader对象，
 4 CalcTron对象的init方法中设置setMode，
-5 setMode方法使用ClassLoader对象调用load方法动态加载Mode js文件，并添加
-script标签到文档中
-6 mode js文件被浏览器加载解析，在Standard.js文件中创建 标准mode对象
-并setMode
+5 setMode方法使用ClassLoader对象调用load方法动态加载Standard js文件；document对象为Standard.js文件创建script标签，然后添加到document的head标签下
+
+6 浏览器检测到添加的script标签引用到了外部js文件，浏览器加载解析Standard.js；在该文件中创建了Mode对象（Standard.prototype=new Mode()实现继承）
+然后创建了Standard对象，并且调用了setMode方法（calcTron.setMode(new Standard())）
+
+7 因为第6步骤调用了setMode方法，并且参数为Standard对象，所以会执行如下：
+ this.currentMode=mode;
+ this.currentMode.init();
+ 
+ 其中this.currentMode.init()实际上是调用了Mode类型的init方法，因为Standard对象继承自Mode对象，并且传递给init方法的参数为null。
+ 
+ 8 在Mode类型的init方法中，检测到收到的参数为null，然后加载Standard.json文件，并创建标签script，将该json文件添加到head标签下。
+
+9 浏览器解析Standard.json文件，执行json文件中的calcTron.currentMode.init方法，也就是又重新调用了Mode类型的init方法，此时init方法的参数不为null
+
+10
+
+
+解析执行Standard.js文件中的Standard.prototype=new Mode(),是的Standard类继承自Mode类型；然后设置Model类型为 new Standard(),
+添加script标签到文档中
 7 setMode的else方法执行，设置当前mode，然后调用mode对象的init方法,init方法 的接收参数为null
 ,
 8 ，如果方法接收的参数为null，那么就去加载json文件，
